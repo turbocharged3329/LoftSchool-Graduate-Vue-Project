@@ -1,26 +1,34 @@
 <template>
-  <div class='mainpage'>
+  <div class="mainpage">
     <Header>
       <template v-slot:user-actions>
-        <h1>123</h1>
-        </template> 
+        <UserActions />
+      </template>
+      <template v-slot:user-stories>
+        <UserStories />
+      </template>
     </Header>
   </div>
 </template>
 
 <script>
-import Header from '@/components/header';
+import Header from "@/components/header";
+import UserActions from "@/components/user-actions";
+import UserStories from "@/components/user-stories";
+
 export default {
-  name: 'MainPage',
+  name: "MainPage",
   components: {
-    Header
+    Header,
+    UserActions,
+    UserStories,
   },
   props: {},
   data() {
-    return {}
+    return {};
   },
-  methods: {}
-}
+  methods: {},
+};
 </script>
 
 <style lang="css" scoped></style>
