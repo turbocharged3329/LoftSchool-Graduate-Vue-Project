@@ -8,6 +8,9 @@
         <UserStories />
       </template>
     </Header>
+    <div class="main">
+      <UserIssues :user="users[0]"/>
+    </div>
   </div>
 </template>
 
@@ -15,17 +18,26 @@
 import Header from "@/components/header";
 import UserActions from "@/components/user-actions";
 import UserStories from "@/components/user-stories";
-
+import UserIssues from '@/components/user-issues';
 export default {
   name: "MainPage",
   components: {
     Header,
     UserActions,
     UserStories,
+    UserIssues,
   },
   props: {},
   data() {
-    return {};
+    return {
+      users: [
+        {
+          name: 'joshua_l',
+          profession: 'Vue.js',
+          description: 'JavaScript framework for building interactive web applications ⚡',
+        }
+      ]
+    };
   },
   methods: {},
 };

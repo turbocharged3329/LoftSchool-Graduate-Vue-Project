@@ -1,54 +1,87 @@
 <template>
-  <div class="user-stories">
-    <ul>
-      <li v-for="user in users" :key="user.name">
-        <div class="user-story">
-        <img src="../assets/profile-photo.svg" />
-        {{ user.name }}
+  <div class="users-stories">
+    <ul class="users-stories__list">
+      <li v-for="user in users" :key="user.name" class="users-stories__item">
+        <div class="users-stories__story">
+          <img src="../assets/profile-photo.svg" class="profile-photo_active" />
+          <p class="story__user-name">{{ user.name }}</p>
         </div>
-        </li>
+      </li>
     </ul>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'UserStories',
+  name: "UserStories",
   components: {},
   data() {
     return {
       users: [
         {
-          name: 'John',
+          name: "John",
         },
         {
-          name: 'John',
+          name: "John",
         },
         {
-          name: 'John',
+          name: "John",
         },
         {
-          name: 'John',
+          name: "John",
         },
-      ]
-    }
+        {
+          name: "John",
+        },
+        {
+          name: "John",
+        },
+        {
+          name: "John",
+        },
+        {
+          name: "John",
+        },
+        {
+          name: "John",
+        },
+        {
+          name: "John",
+        },
+      ],
+    };
   },
-}
+};
 </script>
 
 <style lang="css" scoped>
-  .user-stories {
-    height: 100%;
-  }
-  ul {
-    list-style: none;
-    display: flex;
-    justify-content: space-around;
-    padding: 0;
-  }
-  .user-story {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-  }
+.users-stories {
+  height: 100%;
+  width: 100%;
+}
+.users-stories__list {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  padding: 0;
+}
+.users-stories__story {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.profile-photo_active {
+  width: 80px;
+  height: 80px;
+  border: 2px solid #a6328d;
+  border-radius: 50%;
+  padding: 2px;
+}
+.story__user-name {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 10px;
+}
 </style>

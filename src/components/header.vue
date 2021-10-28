@@ -1,19 +1,21 @@
 <template>
-  <div class="header">
-    <div class="navigation">
-      <div class="title">
+  <header class="header">
+    <div class="header-left">
+      <div class="header-left__title">
         <slot>
           <h1>Gitogram/</h1>
         </slot>
       </div>
-      <div class="user-actions">
+    </div>
+    <div class="header-right">
+      <div class="header-left__user-actions">
         <slot name="user-actions"></slot>
       </div>
     </div>
-    <div class="user-stories">
+    <div class="header__user-stories">
       <slot name="user-stories"></slot>
     </div>
-  </div>
+  </header>
 </template>
 
 <script>
@@ -31,21 +33,32 @@ export default {
 <style lang="css" scoped>
 .header {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 0 10%; 
+  background: #FAFAFA;
+  /* в медиа запрос */
 }
-.navigation {
+.header-left {
   display: flex;
+  flex-basis: 50%;
   align-items: center;
-  justify-content: space-around;
-  flex-basis: 100%;
+  justify-content: flex-start;
 }
-.title {
-  flex-basis: 10%;
+.header-right {
+  display: flex;
+  flex-basis: 50%;
+  align-items: center;
+  justify-content: flex-end;
 }
-.user-actions {
-  flex-basis: 10%;
+.header-left__title {
+  flex-basis: 25%;
 }
-.user-stories {
+.header-left__user-actions {
+  flex-basis: 25%;
+}
+.header__user-stories {
   height: 200px;
+  flex-basis: 100%;
 }
 </style>
