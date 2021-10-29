@@ -44,12 +44,14 @@ export default {
   flex-basis: 50%;
   align-items: center;
   justify-content: flex-start;
+  margin: 43px 0px;
 }
 .header-right {
   display: flex;
   flex-basis: 50%;
   align-items: center;
   justify-content: flex-end;
+  margin: 43px 0px;
 }
 .header-left__title {
   flex-basis: 25%;

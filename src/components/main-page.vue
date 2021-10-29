@@ -9,7 +9,7 @@
       </template>
     </Header>
     <div class="main">
-      <UserIssues :user="users[0]"/>
+      <UserIssues :user="users[0]" />
     </div>
   </div>
 </template>
@@ -18,7 +18,7 @@
 import Header from "@/components/header";
 import UserActions from "@/components/user-actions";
 import UserStories from "@/components/user-stories";
-import UserIssues from '@/components/user-issues';
+import UserIssues from "@/components/user-issues";
 export default {
   name: "MainPage",
   components: {
@@ -32,11 +32,28 @@ export default {
     return {
       users: [
         {
-          name: 'joshua_l',
-          profession: 'Vue.js',
-          description: 'JavaScript framework for building interactive web applications ⚡',
-        }
-      ]
+          name: "joshua_l",
+          profession: "Vue.js",
+          description:
+            "JavaScript framework for building interactive web applications ⚡",
+          issues: [
+            {
+              title: "joshua_l",
+              description:
+                "Enable performance measuring in production, at the user's request",
+            },
+            {
+              title: "Camille",
+              description: "It's Impossible to Rename an Inherited Slot",
+            },
+            {
+              title: "Marselle",
+              description:
+                "transition-group with flex parent causes removed items to fly",
+            },
+          ],
+        },
+      ],
     };
   },
   methods: {},

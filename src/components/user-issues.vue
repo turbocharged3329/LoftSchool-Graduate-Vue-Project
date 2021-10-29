@@ -1,10 +1,10 @@
 <template>
   <div class="user-issues">
-    <div class="user-issues__header">
+    <section class="user-issues__header">
       <img src="../assets/profile-photo.svg" class="user-logo">
       <h3 class="user-name">{{ user.name }}</h3>
-    </div>
-    <div class="user-issues__user-info">
+    </section>
+    <section class="user-issues__user-info">
       <h1 class="user-info__title">
         {{ user.profession }}
       </h1>
@@ -12,19 +12,24 @@
         {{ user.description }}
       </p>
       <div class="user-info__actions">
-        <RepoActions :action="{type: 'like', count: 5}"/>
-        <RepoActions :action="{type: 'fork', count: 4}"/>
+        <RepoActions :action="{type: 'like', count: 5}" isLeftRounded />
+        <RepoActions :action="{type: 'fork', count: 4}" isRightRounded />
       </div>
-    </div>
+    </section>
+    <section class="user-issues__block">
+      <Toggler :items="user.issues" v-model="itemsIsHide"/>
+    </section>
   </div>
 </template>
 
 <script>
-import RepoActions from '@/components/repo-actions'
+import RepoActions from '@/components/repo-actions';
+import Toggler from '@/components/toggler';
 export default {
   name: 'UserIssues',
   components: {
-    RepoActions
+    RepoActions,
+    Toggler
   },
   props: {
     user: {
@@ -35,7 +40,9 @@ export default {
     }
   },
   data() {
-    return {}
+    return {
+      itemsIsHide: true,
+    }
   },
   methods: {
   },
@@ -49,6 +56,11 @@ export default {
 }
 .user-issues__header {
   display: flex;
+  margin: 16px 0px;
+  align-items: center;
+}
+.user-name {
+  margin: 0px 14px;
 }
 .user-info__title {
   text-align: left;
@@ -63,6 +75,5 @@ export default {
 }
 .user-info__actions {
   display: flex;
-  border-radius: 20px;
 }
 </style>
