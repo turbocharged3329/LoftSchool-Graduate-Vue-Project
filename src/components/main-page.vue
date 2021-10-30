@@ -31,6 +31,7 @@ import RepoActions from "@/components/repo-actions";
 import UserActions from "@/components/user-actions";
 import UserStories from "@/components/user-stories";
 import UserIssues from "@/components/user-issues";
+
 export default {
   name: "MainPage",
   components: {

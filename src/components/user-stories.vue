@@ -2,19 +2,19 @@
   <div class="users-stories">
     <ul class="users-stories__list">
       <li v-for="user in users" :key="user.name" class="users-stories__item">
-        <div class="users-stories__story">
-          <img src="../assets/profile-photo.svg" class="profile-photo_active" />
-          <p class="story__user-name">{{ user.name }}</p>
-        </div>
+        <UserLogo isBig isActive isVertical/>
       </li>
     </ul>
   </div>
 </template>
 
 <script>
+import UserLogo from '@/components/user-logo';
 export default {
   name: "UserStories",
-  components: {},
+  components: {
+    UserLogo
+  },
   data() {
     return {
       users: [
