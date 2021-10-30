@@ -40,7 +40,6 @@ export default {
   flex-wrap: wrap;
   padding: 0 120px; 
   background: #FAFAFA;
-  /* в медиа запрос */
 }
 .header-left {
   display: flex;

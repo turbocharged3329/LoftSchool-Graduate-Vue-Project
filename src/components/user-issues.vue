@@ -1,8 +1,7 @@
 <template>
   <div class="user-issues">
     <section class="user-issues__header">
-      <img src="../assets/profile-photo.svg" class="user-logo" />
-      <h3 class="user-name">{{ user.name }}</h3>
+      <UserLogo :user="user" />
     </section>
     <section class="user-issues__user-info">
       <h1 class="user-info__title">
@@ -13,14 +12,12 @@
       </p>
       <div class="user-info__actions">
         <slot name="actions"></slot>
-        <!-- <RepoActions :action="{ type: 'like', count: 5 }" isLeftRounded /> -->
-        <!-- <RepoActions :action="{ type: 'fork', count: 4 }" isRightRounded /> -->
       </div>
     </section>
     <section class="user-issues__block">
       <Toggler
         :items="user.issues"
-        @toggle="test($event)"
+        @toggle="showItems($event)"
         :isHidden="itemsIsHide"
       />
     </section>
@@ -31,13 +28,15 @@
 </template>
 
 <script>
-// import RepoActions from "@/components/repo-actions";
 import Toggler from "@/components/toggler";
+import UserLogo from '@/components/user-logo';
+
 export default {
   name: "UserIssues",
   components: {
     // RepoActions,
     Toggler,
+    UserLogo
   },
   props: {
     user: {
@@ -53,7 +52,7 @@ export default {
     };
   },
   methods: {
-    test(e) {
+    showItems(e) {
       this.itemsIsHide = e;
     },
   },

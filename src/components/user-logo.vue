@@ -7,7 +7,12 @@
     class="user-img" 
     :class="{'big' : isBig, 'small': !isBig, 'active': isActive}"
     />
-      <p class="user-name">joshua_l</p>
+      <p 
+      class="user-name"
+      :class="{'text-bold': !isVertical, 'text-normal': isVertical}"
+      >
+      {{user.name}}
+      </p>
   </div>
 </template>
 
@@ -16,6 +21,9 @@ export default {
   name: 'UserLogo',
   components: {},
   props: {
+    user: {
+      type: Object,
+    },
     isVertical: {
       type: Boolean,
       default: false
@@ -57,7 +65,13 @@ export default {
   border-radius: 50%;
   padding: 2px;
 }
-.user-name {
+.text-bold {
+  font-weight: bold;
+  font-size: 18px;
   margin-left: 12px;
+}
+.text-normal {
+  font-weight: normal;
+  font-size: 12;
 }
 </style>

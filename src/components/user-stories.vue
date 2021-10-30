@@ -2,7 +2,7 @@
   <div class="users-stories">
     <ul class="users-stories__list">
       <li v-for="user in users" :key="user.name" class="users-stories__item">
-        <UserLogo isBig isActive isVertical/>
+        <UserLogo isBig isActive isVertical :user="user" />
       </li>
     </ul>
   </div>
@@ -10,6 +10,7 @@
 
 <script>
 import UserLogo from '@/components/user-logo';
+
 export default {
   name: "UserStories",
   components: {
@@ -77,7 +78,7 @@ export default {
   justify-content: space-around;
 }
 .users-stories__item {
-  margin-right: 1%;
+  margin-right: 31px;
 }
 .profile-photo_active {
   width: 80px;
