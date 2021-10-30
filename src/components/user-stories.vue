@@ -58,17 +58,26 @@ export default {
 .users-stories {
   height: 100%;
   width: 100%;
+  overflow-x: scroll;
+  scrollbar-width: none;
+}
+.user-stories::-webkit-scrollbar {
+  display: none; 
 }
 .users-stories__list {
   list-style: none;
   display: flex;
   justify-content: space-between;
   padding: 0;
+  margin: 0px;
 }
 .users-stories__story {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+}
+.users-stories__item {
+  margin-right: 1%;
 }
 .profile-photo_active {
   width: 80px;

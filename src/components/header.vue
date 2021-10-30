@@ -3,7 +3,7 @@
     <div class="header-left">
       <div class="header-left__title">
         <slot>
-          <h1>Gitogram/</h1>
+          <MainTitle />
         </slot>
       </div>
     </div>
@@ -19,9 +19,12 @@
 </template>
 
 <script>
+import MainTitle from '@/components/main-title';
 export default {
   name: "Header",
-  components: {},
+  components: {
+    MainTitle
+  },
   props: {},
   data() {
     return {};
@@ -35,7 +38,7 @@ export default {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  padding: 0 10%; 
+  padding: 0 120px; 
   background: #FAFAFA;
   /* в медиа запрос */
 }
@@ -44,23 +47,42 @@ export default {
   flex-basis: 50%;
   align-items: center;
   justify-content: flex-start;
-  margin: 43px 0px;
+  align-self: flex-start;
+  margin-top: 40px;
 }
 .header-right {
   display: flex;
   flex-basis: 50%;
   align-items: center;
   justify-content: flex-end;
-  margin: 43px 0px;
+  align-self: flex-start;
+  margin-top: 40px;
 }
 .header-left__title {
   flex-basis: 25%;
+  display: flex;
 }
 .header-left__user-actions {
-  flex-basis: 25%;
+  flex-basis: 20%;
 }
 .header__user-stories {
-  height: 200px;
   flex-basis: 100%;
+  align-self: flex-end;
+  margin-bottom: 40px;
+}
+@media (max-width: 1279px) {
+  .header {
+    padding: 0px 20px;
+    height: 262px;
+  } 
+  .header-left__user-actions {
+  flex-basis: 30%;
+  }
+}
+@media (min-width: 1280px) {
+  .header {
+    padding: 0px 20px;
+    height: 270px;
+  } 
 }
 </style>

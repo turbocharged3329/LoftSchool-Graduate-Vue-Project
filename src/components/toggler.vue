@@ -1,7 +1,23 @@
 <template>
   <div class="toggler">
-    <p class="toggler__title">{{ 'Hide issues' }}</p>
-     <ul class="toggler__list">
+    <div
+    @pointerdown="toggleList()" 
+    class="toggler__title"
+    >
+    <span class="action-desc">{{ isHidden ?  'Show issues' : 'Hide issues'}}&nbsp;</span>
+    <img 
+    v-show="!isHidden" 
+    src="../assets/arrowup-icon.png" 
+    />
+    <img 
+    v-show="isHidden" 
+    src="../assets/arrowdown-icon.png" 
+    />
+    </div>
+     <ul 
+     class="toggler__list" 
+     v-if="!isHidden"
+     >
         <li v-for="item in items" :key="item.id" class="list-item">
           <span class="list-item__title">{{ item.title }}&nbsp;</span>
           <span>{{ item.description }}</span>
@@ -22,11 +38,18 @@ export default {
         return []
     }
   },
+    isHidden: {
+      type: Boolean,
+      default: false
+    }
   },
   data() {
-    return {}
   },
-  methods: {}
+  methods: {
+    toggleList() {
+      this.$emit('toggle', !this.isHidden)
+    }
+  }
 }
 </script>
 
@@ -40,8 +63,12 @@ export default {
   margin: 8px 0;
 }
 .toggler__title {
-  text-align: left;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  cursor: pointer;
 }
 .list-item__title {
   font-weight: 700;
-}</style>
+}
+</style>

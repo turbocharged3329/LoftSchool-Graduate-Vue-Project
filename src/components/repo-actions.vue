@@ -4,16 +4,14 @@
     class="repo-actions__btn" 
     :class="{ 'left-rounded': isLeftRounded }"
     >
-      <img 
-      v-if="action.type=='fork'"
-      class="btn__icon" 
-      src="../assets/fork-icon.svg"
-      />
-      <img
-      v-if="action.type=='like'"
-      class="btn__icon" 
-      src="../assets/star-icon.svg"
-      />  
+      <div
+      v-if="action.type=='like'" 
+      class="star-icon"
+      ></div>
+      <div
+      v-if="action.type=='fork'" 
+      class="fork-icon"
+      ></div>
       {{ action.type == 'like' ? 'Star' : 'Fork' }}
     </button>
       <div 
@@ -60,13 +58,19 @@ export default {
   justify-content: space-around;
   align-items: center;
   border: 2px solid rgba(27, 31, 35, 0.15);
+  background-color: #FAFBFC;
+}
+.repo-actions__btn:hover .star-icon {
+  background-image: url('../assets/stargreen-icon.svg');
+}
+.repo-actions__btn:hover .fork-icon {
+  background-image: url('../assets/forkgreen-icon.svg');
 }
 .btn__icon {
   display: inline;
 }
 .repo-actions__count {
   flex-basis: 40%;
-  background: #FAFBFC;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -78,5 +82,15 @@ export default {
 }
 .right-rounded {
   border-radius: 0px 6px 6px 0px;
+}
+.star-icon {
+  background-image: url('../assets/star-icon.svg');
+  width: 15px;
+  height: 15px;
+}
+.fork-icon {
+  background-image: url('../assets/fork-icon.svg');
+  width: 12px;
+  height: 15px;
 }
 </style>
