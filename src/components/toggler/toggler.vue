@@ -7,11 +7,11 @@
     <span class="action-desc">{{ isHidden ?  'Show issues' : 'Hide issues'}}&nbsp;</span>
     <img 
     v-show="!isHidden" 
-    src="../assets/arrowup-icon.png" 
+    src="../../assets/arrowup-icon.png" 
     />
     <img 
     v-show="isHidden" 
-    src="../assets/arrowdown-icon.png" 
+    src="../../assets/arrowdown-icon.png" 
     />
     </div>
      <ul 

@@ -61,10 +61,10 @@ export default {
   background-color: #FAFBFC;
 }
 .repo-actions__btn:hover .star-icon {
-  background-image: url('../assets/stargreen-icon.svg');
+  background-image: url('../../assets/stargreen-icon.svg');
 }
 .repo-actions__btn:hover .fork-icon {
-  background-image: url('../assets/forkgreen-icon.svg');
+  background-image: url('../../assets/forkgreen-icon.svg');
 }
 .btn__icon {
   display: inline;
@@ -84,12 +84,12 @@ export default {
   border-radius: 0px 6px 6px 0px;
 }
 .star-icon {
-  background-image: url('../assets/star-icon.svg');
+  background-image: url('../../assets/star-icon.svg');
   width: 15px;
   height: 15px;
 }
 .fork-icon {
-  background-image: url('../assets/fork-icon.svg');
+  background-image: url('../../assets/fork-icon.svg');
   width: 12px;
   height: 15px;
 }

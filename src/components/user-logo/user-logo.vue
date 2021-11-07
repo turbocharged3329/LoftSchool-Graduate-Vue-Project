@@ -3,7 +3,7 @@
   class='user-logo'
   :class="{'vertical': isVertical}"
   >
-    <img src="../assets/profile-photo.svg" 
+    <img :src="repository.avatar ? repository.avatar : '../assets/profile-photo.svg'" 
     class="user-img" 
     :class="{'big' : isBig, 'small': !isBig, 'active': isActive}"
     />
@@ -11,7 +11,7 @@
       class="user-name"
       :class="{'text-bold': !isVertical, 'text-normal': isVertical}"
       >
-      {{user.name}}
+      {{repository.name}}
       </p>
   </div>
 </template>
@@ -21,7 +21,7 @@ export default {
   name: 'UserLogo',
   components: {},
   props: {
-    user: {
+    repository: {
       type: Object,
     },
     isVertical: {
@@ -36,7 +36,7 @@ export default {
       type: Boolean,
       default: false
     }
-  },
+  }, 
   data() {
     return {}
   },
@@ -45,33 +45,36 @@ export default {
 
 <style lang="css" scoped>
 .user-logo {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-}
-.vertical {
-  flex-direction: column;
-}
-.big {
-  width: 80px;
-  height: 80px;
-}
-.small {
-  width: 37px;
-  height: 37px;
-}
-.active {
-  border: 2px solid #a6328d;
-  border-radius: 50%;
-  padding: 2px;
-}
-.text-bold {
-  font-weight: bold;
-  font-size: 18px;
-  margin-left: 12px;
-}
-.text-normal {
-  font-weight: normal;
-  font-size: 12;
-}
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .user-img {
+    border-radius: 50%;
+  }
+  .vertical {
+    flex-direction: column;
+  }
+  .big {
+    width: 80px;
+    height: 80px;
+  }
+  .small {
+    width: 37px;
+    height: 37px;
+  }
+  .active {
+    border: 2px solid #a6328d;
+    border-radius: 50%;
+    padding: 2px;
+  }
+  .text-bold {
+    font-weight: bold;
+    font-size: 18px;
+    margin-left: 12px;
+  }
+  .text-normal {
+    font-weight: normal;
+    font-size: 12;
+  }
 </style>

@@ -1,14 +1,14 @@
 <template>
   <div class="user-issues">
     <section class="user-issues__header">
-      <UserLogo :user="user" />
+      <UserLogo :repository="repository" />
     </section>
     <section class="user-issues__user-info">
       <h1 class="user-info__title">
-        {{ user.profession }}
+        {{ repository.profession }}
       </h1>
       <p class="user-info__prof-info">
-        {{ user.description }}
+        {{ repository.description }}
       </p>
       <div class="user-info__actions">
         <slot name="actions"></slot>
@@ -16,7 +16,7 @@
     </section>
     <section class="user-issues__block">
       <Toggler
-        :items="user.issues"
+        :items="repository.issues"
         @toggle="showItems($event)"
         :isHidden="itemsIsHide"
       />
@@ -28,8 +28,8 @@
 </template>
 
 <script>
-import Toggler from "@/components/toggler";
-import UserLogo from '@/components/user-logo';
+import Toggler from "@/components/toggler/toggler";
+import UserLogo from '@/components/user-logo/user-logo';
 
 export default {
   name: "UserIssues",
@@ -39,7 +39,7 @@ export default {
     UserLogo
   },
   props: {
-    user: {
+    repository: {
       type: Object,
       default() {
         return {};

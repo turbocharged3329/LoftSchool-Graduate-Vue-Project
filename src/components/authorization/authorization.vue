@@ -7,14 +7,14 @@
       <button class="authorization__form-btn">Autorize with GitHub</button>
     </section>
     <section class="authorization__picture">
-      <img src="../assets/authorization-img.png" />
+      <img src="../../assets/authorization-img.png" />
     </section>
   </main>
   <footer>© Gitogram from Loftschool</footer>
 </template>
 
 <script>
-import MainTitle from "@/components/main-title";
+import MainTitle from "@/components/main-title/main-title";
 export default {
   name: "Authorization",
   components: {
@@ -30,23 +30,23 @@ export default {
 
 <style lang="css" scoped>
 .authorization__form {
-  display: flex;
-  flex-direction: column;
-  width: 256px;
-  height: 196px;
-  align-items: flex-start
+display: flex;
+flex-direction: column;
+width: 256px;
+height: 196px;
+align-items: flex-start
 }
 .authorization__form-btn {
-  background: #31ae54;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  display: flex;
-  flex-direction: row;
-  flex-basis: 100%;
-  justify-content: center;
-  align-items: center;
-  padding: 11px 109px;
-  font-weight: bold;
+background: #31ae54;
+color: white;
+border: none;
+border-radius: 5px;
+display: flex;
+flex-direction: row;
+flex-basis: 100%;
+justify-content: center;
+align-items: center;
+padding: 11px 109px;
+font-weight: bold;
 }
 </style>

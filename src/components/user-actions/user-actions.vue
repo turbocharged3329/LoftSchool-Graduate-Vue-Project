@@ -1,8 +1,8 @@
 <template >
   <div class='user-actions'>
-   <img src="../assets/profile-photo.svg" class="user-actions__img"/> 
-   <img src="../assets/home-ico.svg" class="user-actions__img"/> 
-   <img src="../assets/sign-out-ico.svg" class="user-actions__img"/> 
+   <img src="../../assets/profile-photo.svg" class="user-actions__img"/> 
+   <img src="../../assets/home-ico.svg" class="user-actions__img"/> 
+   <img src="../../assets/sign-out-ico.svg" class="user-actions__img"/> 
   </div>
 </template>
 

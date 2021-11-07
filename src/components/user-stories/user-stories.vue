@@ -2,56 +2,32 @@
   <div class="users-stories">
     <ul class="users-stories__list">
       <li v-for="user in users" :key="user.name" class="users-stories__item">
-        <UserLogo isBig isActive isVertical :user="user" />
+        <UserLogo isBig isActive isVertical :repository="user" />
       </li>
     </ul>
   </div>
 </template>
 
 <script>
-import UserLogo from '@/components/user-logo';
+import UserLogo from '@/components/user-logo/user-logo';
 
 export default {
   name: "UserStories",
   components: {
     UserLogo
   },
+  props: {
+    users: {
+      type: Array
+    }
+  },
   data() {
     return {
-      users: [
-        {
-          name: "John",
-        },
-        {
-          name: "John",
-        },
-        {
-          name: "John",
-        },
-        {
-          name: "John",
-        },
-        {
-          name: "John",
-        },
-        {
-          name: "John",
-        },
-        {
-          name: "John",
-        },
-        {
-          name: "John",
-        },
-        {
-          name: "John",
-        },
-        {
-          name: "John",
-        },
-      ],
     };
   },
+  mounted() {
+    console.log(this.users);
+  }
 };
 </script>
 

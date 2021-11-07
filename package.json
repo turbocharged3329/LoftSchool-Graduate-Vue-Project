@@ -5,21 +5,35 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "dependencies": {
+    "@storybook/addon-knobs": "^6.3.1",
+    "axios": "^0.24.0",
     "core-js": "^3.6.5",
+    "jshint": "^2.13.1",
     "serve": "^12.0.1",
     "vue": "^3.0.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.16.0",
+    "@storybook/addon-actions": "^6.3.12",
+    "@storybook/addon-backgrounds": "^6.3.12",
+    "@storybook/addon-controls": "^6.3.12",
+    "@storybook/addon-essentials": "^6.3.12",
+    "@storybook/addon-links": "^6.3.12",
+    "@storybook/vue3": "^6.3.12",
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
     "@vue/compiler-sfc": "^3.0.0",
     "babel-eslint": "^10.1.0",
+    "babel-loader": "^8.2.3",
     "eslint": "^6.7.2",
-    "eslint-plugin-vue": "^7.0.0"
+    "eslint-plugin-vue": "^7.0.0",
+    "vue-loader": "^16.8.2"
   },
   "eslintConfig": {
     "root": true,

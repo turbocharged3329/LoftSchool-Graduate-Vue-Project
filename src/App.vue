@@ -7,7 +7,7 @@
 
 <script>
 import MainPage from '@/components/main-page';
-// import Authorization from '@/components/authorization';
+// import Authorization from '@/components/authorization/authorization';
 export default {
   name: 'App',
   components: {

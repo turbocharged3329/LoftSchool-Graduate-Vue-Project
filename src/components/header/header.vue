@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import MainTitle from '@/components/main-title';
+import MainTitle from '@/components/main-title/main-title';
 export default {
   name: "Header",
   components: {
