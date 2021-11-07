@@ -97,30 +97,15 @@ export default {
         description: item.description,
         forks: item.forks_count,
         stars: item.watchers_count,
-        issues: []
+        issues: [],
+        issues_url: item.open_issues > 0 
+        ? item.issues_url.replace('{/number}', '')
+        : null
       })
     }
 
     return response;
     })
-    .then((response) => {
-      response.data.items.forEach((item, i) => {
-        if (item.open_issues > 0) { 
-        this.axios(item.issues_url.replace('{/number}', ''))
-        .then(response => {
-          for (let issue of response.data) {
-          this.repositories[i].issues.push(
-            {
-              title: issue.user.login,
-              description: issue.title
-            }
-          )
-          }
-        })
-        }
-      })
-    })
-    ;
   },
 };
 </script>

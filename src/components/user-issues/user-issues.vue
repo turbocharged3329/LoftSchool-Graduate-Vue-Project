@@ -16,7 +16,7 @@
     </section>
     <section class="user-issues__block">
       <Toggler
-        :items="repository.issues"
+        :items="issues"
         @toggle="showItems($event)"
         :isHidden="itemsIsHide"
       />
@@ -49,13 +49,32 @@ export default {
   data() {
     return {
       itemsIsHide: true,
+      issues: [],
     };
   },
   methods: {
     showItems(e) {
       this.itemsIsHide = e;
     },
+    getIssues() {
+      if (this.repository.issues_url) { 
+        this.axios(this.repository.issues_url)
+        .then(response => {
+          response.data.forEach(issue => {
+            this.issues.push(
+            {
+              title: issue.user.login,
+              description: issue.title
+            }
+          )
+          }) 
+        })
+        }
+    }
   },
+  mounted() {
+    this.$nextTick(this.getIssues())
+  }
 };
 </script>
 
