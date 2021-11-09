@@ -5,7 +5,7 @@
         <UserActions />
       </template>
       <template v-slot:user-stories>
-        <UserStories :users="repositories"/>
+        <UserStories :users="getRepositories"/>
       </template>
     </Header>
     <div class="main">
@@ -22,7 +22,7 @@
         </template>
       </SliderItem> -->
       <!--  -->
-      <template v-for="repo in repositories" :key="repo.name">
+      <template v-for="repo in getRepositories" :key="repo.name">
       <UserIssues :repository="repo">
         <template v-slot:actions>
           <RepoActions :action="{ type: 'like', count: repo.stars }" isLeftRounded />
@@ -44,6 +44,8 @@ import UserIssues from "@/components/user-issues/user-issues";
 // import ProgressBar from '@/components//progress-bar/progress-bar';
 // import UserLogo from '@/components/user-logo';
 // import CustomButton from '@/components/custom-button';
+import {createNamespacedHelpers} from 'vuex';
+const {mapState, mapActions, mapGetters} = createNamespacedHelpers('repositories');
 
 export default {
   name: "MainPage",
@@ -64,7 +66,18 @@ export default {
       repositories: [],
     };
   },
+  computed: {
+  ...mapState ({
+    repositories: state => state.repositories  
+  }),
+  ...mapGetters ([
+    'getRepositories'
+  ])
+  },
   methods: {
+    ...mapActions([
+      'getRepositoriesFromApi'
+    ]),
     getWeekAgoTime() {
       let time = new Date();
       time.setDate(time.getDate() - 7);
@@ -86,26 +99,27 @@ export default {
     },
   },
   mounted() {
-    this.getWeekAgoTime()
-    this.getRepositories()
-    .then((response) => {
-    for (let item of response.data.items) {      
-      this.repositories.push({
-        name: item.owner.login,
-        avatar: item.owner.avatar_url,
-        profession: item.language,
-        description: item.description,
-        forks: item.forks_count,
-        stars: item.watchers_count,
-        issues: [],
-        issues_url: item.open_issues > 0 
-        ? item.issues_url.replace('{/number}', '')
-        : null
-      })
-    }
+    this.getRepositoriesFromApi(this.getWeekAgoTime());
+    // 
+    // this.getRepositories()
+    // .then((response) => {
+    // for (let item of response.data.items) {      
+    //   this.repositories.push({
+    //     name: item.owner.login,
+    //     avatar: item.owner.avatar_url,
+    //     profession: item.language,
+    //     description: item.description,
+    //     forks: item.forks_count,
+    //     stars: item.watchers_count,
+    //     issues: [],
+    //     issues_url: item.open_issues > 0 
+    //     ? item.issues_url.replace('{/number}', '')
+    //     : null
+    //   })
+    // }
 
-    return response;
-    })
+    // return response;
+    // })
   },
 };
 </script>
