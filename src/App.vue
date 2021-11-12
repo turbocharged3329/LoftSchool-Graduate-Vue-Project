@@ -1,19 +1,17 @@
 <template>
 <div id="app">
-  <MainPage />
-  <!-- <Authorization /> -->
+  <router-link :to="{path: '/slider'}">Slider</router-link>
+  <router-view></router-view>
 </div>
 </template>
 
 <script>
-import MainPage from '@/components/main-page';
-// import Authorization from '@/components/authorization/authorization';
 export default {
   name: 'App',
-  components: {
-    MainPage,
-    // Authorization
-  },
+  components: {},
+  mounted() {
+    this.$router.push('/');
+  }
 }
 </script>
 
