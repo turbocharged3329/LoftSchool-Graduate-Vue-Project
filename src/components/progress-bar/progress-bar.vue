@@ -46,5 +46,6 @@ export default {
   background-color: #31ae54;
   width: 100%;
   height: 2px;
+  margin: 10px 0;
 }
 </style>

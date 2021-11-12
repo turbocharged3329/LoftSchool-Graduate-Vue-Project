@@ -1,9 +1,12 @@
 <template>
-  <header class="header">
+  <header 
+  class="header" 
+  :class="{'header__dark' : isDark}"
+  >
     <div class="header-left">
       <div class="header-left__title">
         <slot>
-          <MainTitle />
+          <MainTitle :isDark="isDark"/>
         </slot>
       </div>
     </div>
@@ -25,7 +28,12 @@ export default {
   components: {
     MainTitle
   },
-  props: {},
+  props: {
+    isDark: {
+      type: Boolean,
+      default: false
+    }
+  },
   data() {
     return {};
   },
@@ -40,6 +48,7 @@ export default {
   flex-wrap: wrap;
   padding: 0 120px; 
   background: #FAFAFA;
+  width: 100%;
 }
 .header-left {
   display: flex;
@@ -69,10 +78,13 @@ export default {
   align-self: flex-end;
   margin-bottom: 40px;
 }
+.header__dark {
+  background: #000000;
+}
 @media (max-width: 1279px) {
   .header {
     padding: 0px 20px;
-    height: 262px;
+    max-height: 262px;
   } 
   .header-left__user-actions {
   flex-basis: 30%;
@@ -81,7 +93,7 @@ export default {
 @media (min-width: 1280px) {
   .header {
     padding: 0px 20px;
-    height: 270px;
+    max-height: 270px;
   } 
 }
 </style>

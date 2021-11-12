@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>
+    <h1 :class="{'title__dark' : isDark}">
       <slot>
         Gitogram/
       </slot>
@@ -12,7 +12,12 @@
 export default {
   name: 'MainTitle',
   components: {},
-  props: {},
+  props: {
+    isDark: {
+      type: Boolean,
+      default: false,
+    }
+  },
   data() {
     return {}
   },
@@ -20,4 +25,8 @@ export default {
 }
 </script>
 
-<style lang="css" scoped></style>
+<style lang="css" scoped>
+.title__dark {
+  color: white;
+}
+</style>

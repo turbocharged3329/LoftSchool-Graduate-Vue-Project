@@ -39,7 +39,7 @@ export default {
       queryParams.append("order", "desc");
       queryParams.append("sort", "start");
       queryParams.append("q", "language:javascript created:>" + payload);
-      queryParams.append("per_page", 10);
+      queryParams.append("per_page", 1);
 
       return axios({
         url: "/search/repositories",

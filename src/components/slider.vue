@@ -1,5 +1,11 @@
 <template>
   <div class="slider">
+    <Header isDark>
+      <template v-slot:user-actions>
+        <button style="color: white;">x</button>
+      </template>
+    </Header>
+    <div class="slider-items">
     <template v-for="repo in getRepositories" :key="repo.id">
       <SliderItem :content="'This is the first story'">
         <template v-slot:default>
@@ -13,10 +19,12 @@
         </template>
       </SliderItem>
     </template>
+    </div>
   </div>
 </template>
 
 <script>
+import Header from '@/components/header/header'
 import SliderItem from '@/components/slider-item/slider-item';
 import ProgressBar from '@/components/progress-bar/progress-bar';
 import UserLogo from '@/components/user-logo/user-logo';
@@ -31,6 +39,7 @@ export default {
     ProgressBar,
     UserLogo,
     CustomButton,
+    Header
   },
   props: {},
   data() {
@@ -62,12 +71,13 @@ export default {
 
 <style lang="css" scoped>
 .slider {
-  display: flex;
   background: black;
-  width: calc(100vw);
+  width: 100%;
   height: calc(100vh);
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-evenly;
+  overflow: hidden;
+}
+.slider-items {
+  display: flex;
+  height: 70%;
 }
 </style>

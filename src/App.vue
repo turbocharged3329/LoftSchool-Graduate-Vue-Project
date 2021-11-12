@@ -1,6 +1,5 @@
 <template>
 <div id="app">
-  <router-link :to="{path: '/slider'}">Slider</router-link>
   <router-view></router-view>
 </div>
 </template>
@@ -27,6 +26,7 @@ export default {
 }
 body {
   margin: 0px;
+  overflow: hidden;
 }
 h1, h2, h3, h4, h5, h6 {
   margin: 0;
