@@ -7,7 +7,8 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "deploy": "node scripts/gh-pages-deploy.js"
   },
   "dependencies": {
     "@storybook/addon-knobs": "^6.3.1",
@@ -35,7 +36,8 @@
     "babel-loader": "^8.2.3",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^7.0.0",
-    "vue-loader": "^16.8.2"
+    "vue-loader": "^16.8.2",
+    "execa": "latest"
   },
   "eslintConfig": {
     "root": true,
