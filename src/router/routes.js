@@ -19,5 +19,6 @@ export default [
         name: 'Slider',
         path: '/slider',
         component: Slider,
+        props: true
     }
 ]

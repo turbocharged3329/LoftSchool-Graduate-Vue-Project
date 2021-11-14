@@ -1,13 +1,13 @@
 <template>
   <div class="users-stories">
     <ul class="users-stories__list">
-      <li v-for="user in users" :key="user.name" class="users-stories__item">
+      <li v-for="(user, index) in users" :key="user.name" class="users-stories__item">
         <UserLogo 
         isBig 
         isActive 
         isVertical 
         :repository="user"
-        @click="$router.push('/slider')" />
+        @click="$router.push({name: 'Slider', params: {activeItem: index }})" />
       </li>
     </ul>
   </div>

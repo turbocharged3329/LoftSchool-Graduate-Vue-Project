@@ -1,70 +1,168 @@
 <template>
-  <div class="slider-item">
-    <div class="slider-item__header">
-      <div class="slider-item__progress">
-        <slot></slot>
+  <div class="slider-item__wrapper">
+    <div class="slider-item" :class="{ 'slider-item__active': isActive }">
+      <div class="slider-item__header">
+        <div class="slider-item__progress">
+          <slot></slot>
+        </div>
+        <div class="slider-item__user">
+          <slot name="header"></slot>
+        </div>
       </div>
-      <div class="slider-item__user">
-        <slot name="header"></slot>
+      <div class="slider-item__content">
+        <div class="slider-item__placeholder" v-if="!isActive">
+          <img
+            src="../../assets/big-placeholder.png"
+            class="slider-item__placeholder-img"
+          />
+          <img
+            src="../../assets/small-placeholder.png"
+            class="slider-item__placeholder-img"
+          />
+          <img
+            src="../../assets/small-placeholder.png"
+            class="slider-item__placeholder-img"
+          />
+        </div>
+        <div class="slider-item__loader" v-if="loading">
+          <img
+            src="../../assets/green-loader.png"
+            class="slider-item__loader-spinner"
+          />
+        </div>
+        <div class="slider-item__content-text" v-if="!loading">
+          <div v-html="repository.readme"></div>
+        </div>
       </div>
-    </div>
-    <div class="slider-item__content">
-      {{ content }}
-    </div>
-    <div class="slider-item__footer">
-      <slot name="footer"></slot>
+      <div class="slider-item__footer">
+        <slot name="footer"></slot>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import { createNamespacedHelpers } from "vuex";
+const { mapState, mapActions, mapGetters } = createNamespacedHelpers("repositories");
+
 export default {
   name: "SliderItem",
   components: {},
   props: {
-    content: {
-      type: String
-    }
+    repository: {
+      type: Object,
+    },
+    isActive: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
+      loading: false,
     };
+  },
+  computed: {
+    ...mapState({
+      repositories: (state) => state.repositories,
+    }),
+    ...mapGetters([
+      'getRepositories'
+    ])
+  },
+  watch: {
+    async isActive(value) {
+      if (value) {
+        console.log('loading');
+        this.loading = true;
+        this.getRepoReadmeFromApi({
+        owner: this.repository.name,
+        repo: this.repository.repo_name,
+        id: this.repository.id
+      }).then(() => {
+        this.loading = false;
+      })
+      } else {
+        this.loading = false
+      }
+    }
+  },
+  methods: {
+    ...mapActions(["getRepoReadmeFromApi"]),
+  },
+  async mounted() {
   },
 };
 </script>
 
 <style lang="css" scoped>
+.slider-item__wrapper {
+  padding: 0 50px;
+  width: 700px;
+  background: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .slider-item {
   display: flex;
   flex-direction: column;
-  width: 375px;
+  min-width: 375px;
+  max-width: 375px;
   background-color: white;
-  margin: 0 auto;
+  margin: 0;
   border-radius: 5px;
-  height: 100%;
+  height: 538px;
+  transition: 0.4s;
 }
 .slider-item__header {
   text-align: left;
   width: 100%;
-  height: 67px;
+  min-height: 67px;
+  max-height: 67px;
   border-bottom: 1px solid #cacaca;
 }
 .slider-item__content {
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin: 5px;
   overflow-y: scroll;
-  width: 100%;
   height: 75%;
+  padding: 30px;
+}
+.slider-item__placeholder {
+  text-align: left;
+}
+.slider-item__placeholder-img {
+  margin: 0.5rem 0;
 }
 .slider-item__progress {
-  height: 5%;
+  height: 20%;
   padding: 0 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .slider-item__user {
   display: flex;
-  height: 95%;
+  height: 80%;
   align-items: center;
   padding: 0 12px;
+}
+.slider-item__loader-spinner {
+  animation-name: rotation;
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 .slider-item__footer {
   display: flex;
@@ -72,5 +170,8 @@ export default {
   align-items: center;
   height: 100px;
   border-top: 1px solid #cacaca;
+}
+.slider-item__active {
+  transform: scale(1.24);
 }
 </style>

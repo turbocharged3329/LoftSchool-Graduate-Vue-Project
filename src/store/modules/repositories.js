@@ -4,13 +4,13 @@ export default {
   namespaced: true,
   state: {
     repositories: {
-      data: {},
+      data: [],
     },
   },
   getters: {
     getRepositories(state) {
         return state.repositories.data;
-    }
+    },
   },
   mutations: {
     SET_REPOS_TO_STATE(state, data) {
@@ -18,7 +18,9 @@ export default {
 
         for (let item of data.items) {      
               repositories.push({
+                id: item.id,
                 name: item.owner.login,
+                repo_name: item.name,
                 avatar: item.owner.avatar_url,
                 profession: item.language,
                 description: item.description,
@@ -32,6 +34,10 @@ export default {
         }
       return state.repositories.data = repositories;
     },
+
+    SET_README_TO_STATE_REPO(state, id, data) {
+      return state.repositories.data.find(repo => repo.id == id).readme = data;
+    }
   },
   actions: {
     getRepositoriesFromApi({ commit }, payload) {
@@ -39,7 +45,7 @@ export default {
       queryParams.append("order", "desc");
       queryParams.append("sort", "start");
       queryParams.append("q", "language:javascript created:>" + payload);
-      queryParams.append("per_page", 1);
+      queryParams.append("per_page", 10);
 
       return axios({
         url: "/search/repositories",
@@ -49,6 +55,21 @@ export default {
       }).then((response) => {
           commit('SET_REPOS_TO_STATE', response.data);
       });
+    },
+
+    getRepoReadmeFromApi({commit}, payload) {
+      const contentFormat = 'application/vnd.github.v3.html+json';
+      return axios({
+        url: `/repos/${payload.owner}/${payload.repo}/readme`,
+        method: 'GET',
+        baseURL: "https://api.github.com",
+        headers: {
+          accept: contentFormat, 
+        }
+      }).then((response) => {
+        console.log(payload.id);
+        commit('SET_README_TO_STATE_REPO', payload.id, response.data)
+      })
     },
   },
 };
