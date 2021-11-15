@@ -35,8 +35,8 @@ export default {
       return state.repositories.data = repositories;
     },
 
-    SET_README_TO_STATE_REPO(state, id, data) {
-      return state.repositories.data.find(repo => repo.id == id).readme = data;
+    SET_README_TO_STATE_REPO(state, data) {
+      return state.repositories.data.find(repo => repo.id == data.id).readme = data.content;
     }
   },
   actions: {
@@ -67,8 +67,7 @@ export default {
           accept: contentFormat, 
         }
       }).then((response) => {
-        console.log(payload.id);
-        commit('SET_README_TO_STATE_REPO', payload.id, response.data)
+        commit('SET_README_TO_STATE_REPO', {id: payload.id, content: response.data})
       })
     },
   },

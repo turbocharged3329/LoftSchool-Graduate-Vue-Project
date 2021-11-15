@@ -103,6 +103,7 @@ export default {
 
 <style lang="css" scoped>
 .slider {
+  display: block;
   background: black;
   width: 100%;
   height: calc(100vh);
@@ -118,6 +119,7 @@ export default {
   flex-wrap: nowrap;
   width: 100%;
   transition: 0.4s;
+  overflow: hidden;
 }
 .slider__close-button {
   background: transparent;
@@ -132,7 +134,7 @@ export default {
 }
 .slider__nav-btn {
   z-index: 99;
-  position: fixed;
+  position: absolute;
   top: 50%;
   display: flex;
   justify-content: center;
@@ -144,11 +146,11 @@ export default {
   background: white;
 }
 .slider__nav-btn-left {
-  left: 35%;
+  left: 37%;
   transform: rotate(180deg);
 }
 .slider__nav-btn-right {
-  right: 35%;
+  right: 37%;
 }
 .slider__nav-btn-arrow {
   filter: grayscale(100);
@@ -159,5 +161,21 @@ export default {
 }
 .slider__nav-btn:hover .slider__nav-btn-arrow {
   filter: grayscale(0);
+}
+@media (min-width: 375px) and (max-width: 767px) {
+  .slider__nav-btn-left {
+    left: 2%;
+  }
+  .slider__nav-btn-right {
+    right: 2%;
+  }
+}
+@media (min-width: 768px) and (max-width: 1439px) {
+  .slider__nav-btn-left {
+    left: 18%;
+  }
+  .slider__nav-btn-right {
+    right: 18%;
+  }
 }
 </style>

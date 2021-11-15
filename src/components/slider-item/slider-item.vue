@@ -10,7 +10,7 @@
         </div>
       </div>
       <div class="slider-item__content">
-        <div class="slider-item__placeholder" v-if="!isActive">
+        <div class="slider-item__placeholder" v-if="!isSlideWithContent">
           <img
             src="../../assets/big-placeholder.png"
             class="slider-item__placeholder-img"
@@ -30,9 +30,10 @@
             class="slider-item__loader-spinner"
           />
         </div>
-        <div class="slider-item__content-text" v-if="!loading">
-          <div v-html="repository.readme"></div>
-        </div>
+        <div 
+        class="slider-item__content-text" 
+        v-if="!loading" 
+        v-html="repository.readme"></div>
       </div>
       <div class="slider-item__footer">
         <slot name="footer"></slot>
@@ -60,6 +61,7 @@ export default {
   data() {
     return {
       loading: false,
+      isSlideWithContent: false,
     };
   },
   computed: {
@@ -71,9 +73,8 @@ export default {
     ])
   },
   watch: {
-    async isActive(value) {
+    isActive(value) {
       if (value) {
-        console.log('loading');
         this.loading = true;
         this.getRepoReadmeFromApi({
         owner: this.repository.name,
@@ -81,10 +82,9 @@ export default {
         id: this.repository.id
       }).then(() => {
         this.loading = false;
+        this.isSlideWithContent = true
       })
-      } else {
-        this.loading = false
-      }
+      } 
     }
   },
   methods: {
@@ -123,10 +123,6 @@ export default {
   border-bottom: 1px solid #cacaca;
 }
 .slider-item__content {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 5px;
   overflow-y: scroll;
   height: 75%;
   padding: 30px;
@@ -173,5 +169,10 @@ export default {
 }
 .slider-item__active {
   transform: scale(1.24);
+}
+@media (min-width: 375px) and (max-width: 767px) {
+.slider-item__active {
+  transform: scale(0.9);
+}
 }
 </style>
