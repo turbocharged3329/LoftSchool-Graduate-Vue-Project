@@ -54,7 +54,7 @@ export default {
     },
   },
   mounted() {
-    this.$router.push('/user-issues');
+    this.$router.push({name: 'UserIssuesList'});
     this.getRepositoriesFromApi(this.getWeekAgoTime());
   },
 };

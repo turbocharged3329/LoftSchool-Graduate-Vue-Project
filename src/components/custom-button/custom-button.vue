@@ -4,8 +4,8 @@
     class="custom-button__btn"
     :class="{'custom-button__btn-big': isBig, 'custom-button__btn-small': !isBig}"
     >
-      {{ text }}
-      <!-- <img v-if="imageSrc" /> -->
+    <span class="custom-button__text">{{ text }}</span>
+      <img class="custom-button__img" v-if="imageSrc"  />
     </button>
   </div>
 </template>
@@ -19,13 +19,14 @@ export default {
       type: String,
       default: "Git-Button",
     },
-    // imageSrc: {
-    //   type: String,
-    // },
+    imageSrc: {
+      type: String,
+      default: null
+    },
     isBig: {
       type: Boolean,
       default: false
-    }
+    },
   },
   data() {
     return {};
@@ -48,16 +49,19 @@ export default {
   justify-content: center;
   align-items: center;
   height: 44px;
-  /* padding: 11px 109px; */
   font-weight: bold;
-  /* margin: 0 auto; */
+  cursor: pointer;
+}
+.custom-button__img {
+  width: 22px;
+  height: 22px;
+  margin-left: 2%;
 }
 .custom-button__btn-big {
-  flex-basis: 256px;
-  padding: 11px 109px;
+  min-width: 256px;
+  max-width: 276;
 }
 .custom-button__btn-small {
-  flex-basis: 115px;
-  padding: 10px 20px;
+  min-width: 115px;
 }
 </style>
