@@ -119,7 +119,6 @@ export default {
   flex-wrap: nowrap;
   width: 100%;
   transition: 0.4s;
-  overflow: hidden;
 }
 .slider__close-button {
   background: transparent;
