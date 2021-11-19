@@ -30,6 +30,10 @@
 <script>
 import MainTitle from "@/components/main-title/main-title";
 import CustomButton from '@/components/custom-button/custom-button'
+
+const clientId = 'dc605993abf20cbe6d3f';
+const clientSecret = '2bcf4c5abe8eafc85009c6ec4ee280480955cb00'
+
 export default {
   name: "Authorization",
   components: {
@@ -42,9 +46,32 @@ export default {
   },
   methods: {
     getAuthorization() {
-      this.$router.push("/mainpage");
+      // const params = new URLSearchParams()
+
+      // params.append('client_id', clientId)
+      // params.append('scope', 'repo:status read:user')
+      this.$router.push("/mainpage/user-issues");
+      // window.location.href = `https://github.com/login/oauth/authorize?${params}`
     },
   },
+  async created() {
+    const code = new URLSearchParams(window.location.search).get("code")
+
+    if (code) {
+      this.axios({
+      url: ' https://webdev-api.loftschool.com/github',
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        clientId, clientSecret, code
+      })
+      }).then((response) => {
+        console.log(response.json());
+      })
+    }
+  }
 };
 </script>
 

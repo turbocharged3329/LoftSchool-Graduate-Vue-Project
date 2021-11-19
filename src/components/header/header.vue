@@ -46,7 +46,6 @@ export default {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  padding: 0 120px; 
   background: #FAFAFA;
   width: 100%;
 }
@@ -56,7 +55,7 @@ export default {
   align-items: center;
   justify-content: flex-start;
   align-self: flex-start;
-  margin-top: 40px;
+  height: 30%;
 }
 .header-right {
   display: flex;
@@ -64,36 +63,39 @@ export default {
   align-items: center;
   justify-content: flex-end;
   align-self: flex-start;
-  margin-top: 40px;
+  height: 30%;
 }
 .header-left__title {
   flex-basis: 25%;
   display: flex;
+  margin-left: calc(5vw);
 }
 .header-left__user-actions {
   flex-basis: 20%;
+  margin-right: calc(5vw);
 }
 .header__user-stories {
   flex-basis: 100%;
   align-self: flex-end;
-  margin-bottom: 40px;
+  height: 70%;
 }
 .header__dark {
   background: #000000;
 }
 @media (max-width: 1279px) {
   .header {
-    padding: 0px 20px;
     max-height: 262px;
+    height: 262px;
   } 
   .header-left__user-actions {
-  flex-basis: 30%;
+    flex-basis: 30%;
   }
 }
 @media (min-width: 1280px) {
   .header {
     padding: 0px 20px;
     max-height: 270px;
+    height: 270px;
   } 
 }
 </style>

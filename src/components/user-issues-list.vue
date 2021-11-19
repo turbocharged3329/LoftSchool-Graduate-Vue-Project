@@ -49,4 +49,8 @@ export default {
 }
 </script>
 
-<style lang="css" scoped></style>
+<style lang="css" scoped>
+.user-issues-list {
+  padding: 0 5%;
+}
+</style>

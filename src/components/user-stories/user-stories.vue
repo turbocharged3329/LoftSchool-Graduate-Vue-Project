@@ -41,6 +41,9 @@ export default {
   width: 100%;
   overflow-x: scroll;
   scrollbar-width: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .user-stories::-webkit-scrollbar {
   display: none; 
@@ -49,16 +52,14 @@ export default {
   list-style: none;
   display: flex;
   justify-content: space-between;
-  padding: 0;
+  padding: 0 5%;
   margin: 0px;
+  width: 100%;
 }
 .users-stories__story {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-}
-.users-stories__item {
-  margin-right: 31px;
 }
 .profile-photo_active {
   width: 80px;
