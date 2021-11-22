@@ -56,7 +56,7 @@ export default {
     CustomButton,
     Header,
   },
-  props: ['activeItem'],
+  props: ["activeItem"],
   data() {
     return {
       currentItem: 0,
@@ -78,7 +78,7 @@ export default {
     prevSlide() {
       if (this.currentItem > 0) {
         this.currentItem--;
-        this.moveSlider()
+        this.moveSlider();
       } else {
         this.$refs["slider-items"].style["margin-left"] = "-237.5px";
       }
@@ -86,7 +86,7 @@ export default {
     nextSlide() {
       if (this.currentItem < this.getRepositories.length - 1) {
         this.currentItem++;
-        this.moveSlider()
+        this.moveSlider();
       }
     },
     getWeekAgoTime() {
@@ -95,8 +95,10 @@ export default {
       return time.toISOString().split("T")[0];
     },
     moveSlider() {
-      this.$refs["slider-items"].style["margin-left"] = `-${237.5 + 475 * this.currentItem}px`;
-    }
+      this.$refs["slider-items"].style["margin-left"] = `-${
+        237.5 + 475 * this.currentItem
+      }px`;
+    },
   },
 };
 </script>

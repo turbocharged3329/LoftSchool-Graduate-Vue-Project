@@ -11,7 +11,7 @@
       </div>
     </div>
     <div class="header-right">
-      <div class="header-left__user-actions">
+      <div class="header-right__user-actions">
         <slot name="user-actions"></slot>
       </div>
     </div>
@@ -70,9 +70,11 @@ export default {
   display: flex;
   margin-left: calc(5vw);
 }
-.header-left__user-actions {
+.header-right__user-actions {
   flex-basis: 20%;
   margin-right: calc(5vw);
+  display: flex;
+  justify-content: flex-end;
 }
 .header__user-stories {
   flex-basis: 100%;
@@ -93,9 +95,8 @@ export default {
 }
 @media (min-width: 1280px) {
   .header {
-    padding: 0px 20px;
-    max-height: 270px;
-    height: 270px;
+    max-height: 262px;
+    height: 262px;
   } 
 }
 </style>

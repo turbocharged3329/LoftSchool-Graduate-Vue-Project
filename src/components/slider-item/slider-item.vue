@@ -10,7 +10,7 @@
         </div>
       </div>
       <div class="slider-item__content">
-        <div class="slider-item__placeholder" v-if="!isSlideWithContent">
+        <div class="slider-item__placeholder" v-if="!isSlideWithContent && !loading">
           <img
             src="../../assets/big-placeholder.png"
             class="slider-item__placeholder-img"
@@ -24,12 +24,7 @@
             class="slider-item__placeholder-img"
           />
         </div>
-        <div class="slider-item__loader" v-if="loading">
-          <img
-            src="../../assets/green-loader.png"
-            class="slider-item__loader-spinner"
-          />
-        </div>
+        <Loader v-if="loading" />
         <div 
         class="slider-item__content-text" 
         v-if="!loading" 
@@ -45,10 +40,13 @@
 <script>
 import { createNamespacedHelpers } from "vuex";
 const { mapState, mapActions, mapGetters } = createNamespacedHelpers("repositories");
+import Loader from '@/components/loader/loader';
 
 export default {
   name: "SliderItem",
-  components: {},
+  components: {
+    Loader
+  },
   props: {
     repository: {
       type: Object,
@@ -82,7 +80,7 @@ export default {
         id: this.repository.id
       }).then(() => {
         this.loading = false;
-        this.isSlideWithContent = true
+        if (!this.isSlideWithContent) this.isSlideWithContent = true;
       })
       } 
     }

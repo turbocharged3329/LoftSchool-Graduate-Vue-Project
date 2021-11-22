@@ -65,9 +65,4 @@ export default {
   display: flex;
   flex-direction: column;
 }
-@media (min-width: 1280px) {
-  .main {
-    margin: 0px 230px;
-  }
-}
 </style>

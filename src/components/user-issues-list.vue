@@ -51,6 +51,6 @@ export default {
 
 <style lang="css" scoped>
 .user-issues-list {
-  padding: 0 5%;
+  padding: 0 15%;
 }
 </style>
