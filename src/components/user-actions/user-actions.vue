@@ -1,7 +1,7 @@
 <template>
   <div class="user-actions">
     <img
-      src="../../assets/profile-photo.svg"
+      :src="getUserData.avatar_url"
       class="user-actions__img"
       @click="goTo('UserLiked')"
     />
@@ -10,11 +10,19 @@
       class="user-actions__img"
       @click="goTo('UserIssuesList')"
     />
-    <img src="../../assets/sign-out-ico.svg" class="user-actions__img" />
+    <img 
+      src="../../assets/sign-out-ico.svg" 
+      class="user-actions__img"
+      @click="logout"
+    />
   </div>
 </template>
 
 <script>
+import {createNamespacedHelpers} from 'vuex'
+
+const {mapGetters} = createNamespacedHelpers('user');
+
 export default {
   name: "UserActions",
   components: {},
@@ -22,19 +30,36 @@ export default {
   data() {
     return {};
   },
+  computed: {
+    ...mapGetters([
+      'getUserData'
+    ])
+  },
   methods: {
     goTo(name) {
       this.$router.push({ name });
     },
+    logout() {
+      const answer = confirm('Выйти из системы?')
+      if (answer) {
+        localStorage.removeItem('token');
+        this.$router.push('/')
+      } 
+    }
   },
 };
 </script>
 
 <style lang="css" scoped>
-.user-actions11111111111111111111{
+.user-actions {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
+}
+.user-actions__img {
+  width: 37px;
+  height: 37px;
+  border-radius: 50%;
 }
 </style>

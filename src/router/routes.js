@@ -13,6 +13,11 @@ export default [
         component: Authorization
     },
     {
+        name: 'Authorization',
+        path: '/auth',
+        component: Authorization
+    },
+    {
         name: 'MainPage',
         path: '/mainpage',
         component: MainPage,

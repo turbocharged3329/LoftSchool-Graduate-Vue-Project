@@ -3,20 +3,23 @@
     <div class="authorization__main">
       <div class="authorization__main-form-wrapper">
         <div class="authorization__main-form">
-        <MainTitle />
-        <div class="authorization__main-form-description">
-        <p class="description-text">More than just one repository.</p>
-        <p class="description-text">This is our digital world.</p>
+          <MainTitle />
+          <div class="authorization__main-form-description">
+            <p class="description-text">More than just one repository.</p>
+            <p class="description-text">This is our digital world.</p>
+          </div>
+          <CustomButton
+            :text="buttonText"
+            isBig
+            @click="getAuthorization"
+          ></CustomButton>
         </div>
-        <CustomButton 
-        :text="'Autorize with GitHub'" 
-        isBig
-        @click="getAuthorization"
-        ></CustomButton>
-      </div>
       </div>
       <div class="authorization__picture">
-        <img class="authorization__picture-img" src="../../assets/authorization-img.png" />
+        <img
+          class="authorization__picture-img"
+          src="../../assets/authorization-img.png"
+        />
       </div>
     </div>
     <div class="authorization__footer">
@@ -29,47 +32,80 @@
 
 <script>
 import MainTitle from "@/components/main-title/main-title";
-import CustomButton from '@/components/custom-button/custom-button'
-import {clientId, clientSecret} from '../env';
+import CustomButton from "@/components/custom-button/custom-button";
+import { createNamespacedHelpers } from "vuex";
+import { clientId, clientSecret } from "../env";
+
+const { mapState, mapMutations, mapGetters } = createNamespacedHelpers("user");
 
 export default {
   name: "Authorization",
   components: {
     MainTitle,
-    CustomButton
+    CustomButton,
   },
   props: {},
   data() {
-    return {};
+    return {
+      buttonText: "Autorize with GitHub",
+    };
+  },
+  computed: {
+    ...mapState({
+      user: (state) => state.user,
+    }),
+    ...mapGetters(["getUserData"]),
   },
   methods: {
+    ...mapMutations(["SET_USER_DATA"]),
     getAuthorization() {
-      // const params = new URLSearchParams()
+      if (!localStorage.getItem("token")) {
+        const params = new URLSearchParams();
 
-      // params.append('client_id', clientId)
-      // params.append('scope', 'repo:status read:user')
-      this.$router.push("/mainpage/user-issues");
-      // window.location.href = `https://github.com/login/oauth/authorize?${params}`
+        params.append("client_id", clientId);
+        params.append("scope", "repo:status read:user");
+        window.location.href = `https://github.com/login/oauth/authorize?${params}`;
+      } else {
+        this.axios({
+          url: "https://api.github.com/user",
+          method: "GET",
+          headers: {
+            Authorization: `token ${localStorage.getItem("token")}`,
+          },
+        }).then((response) => {
+          if (response.status >= 200 && response.status < 300) {
+            this.SET_USER_DATA(response.data);
+            this.$router.push({ name: "UserIssuesList" });
+          }
+        });
+      }
     },
   },
   async created() {
-    const code = new URLSearchParams(window.location.search).get("code")
+    if (!localStorage.getItem("token")) {
+      const code = new URLSearchParams(window.location.search).get("code");
 
-    if (code) {
-      this.axios({
-      url: ' https://webdev-api.loftschool.com/github',
-      method: 'POST',
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        clientId, clientSecret, code
-      })
-      }).then((response) => {
-        console.log(response.json());
-      })
+      if (code) {
+        this.axios({
+          url: "https://webdev-api.loftschool.com/github",
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          data: {
+            clientId,
+            clientSecret,
+            code,
+          },
+        }).then((response) => {
+          if (response.status >= 200 && response.status < 300) {
+            localStorage.setItem("token", response.data.token);
+            this.buttonText = "Enter Gitogram/";
+          }
+        });
+      }
     }
-  }
+  },
 };
 </script>
 
@@ -103,13 +139,13 @@ export default {
 .description-text {
   margin: 5px auto;
   width: 100%;
-  text-align: left; 
+  text-align: left;
 }
 .authorization__picture {
   display: flex;
   flex-basis: 50%;
   align-items: center;
-  background: url('../../assets/authorization-img.png') no-repeat;
+  background: url("../../assets/authorization-img.png") no-repeat;
   background-size: 120%;
   background-position-x: -20%;
   background-position-y: 50%;

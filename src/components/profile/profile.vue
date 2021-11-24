@@ -4,7 +4,13 @@
       <div class="profile__user-header">
       <h1 class="profile__user-header-text">My profile</h1>
       </div>
-      <!-- <UserLogo repoInfo /> -->
+      <UserLogo
+       repoInfo
+       :repository="{
+         name: getUserData.login,
+         avatar: getUserData.avatar_url
+       }"
+      />
     </div>
     <div class="profile__content">
       <router-view></router-view>
@@ -13,19 +19,27 @@
 </template>
 
 <script>
-// import UserLogo from '@/components/user-logo/user-logo';
+import UserLogo from '@/components/user-logo/user-logo';
+import {createNamespacedHelpers} from 'vuex';
+
+const {mapGetters} = createNamespacedHelpers('user');
 
 export default {
   name: 'Profile',
   components: {
-    // UserLogo
+    UserLogo
   },
-  props: {},
   data() {
     return {}
   },
+  computed: {
+    ...mapGetters([
+      'getUserData'
+    ])
+  },
   mounted() {
     this.$router.push({name: 'UserLiked'})
+    console.log(this.getUserData);
   },
   methods: {}
 }
