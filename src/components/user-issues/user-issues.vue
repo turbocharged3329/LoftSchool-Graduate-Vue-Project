@@ -1,7 +1,10 @@
 <template>
   <div class="user-issues">
     <section class="user-issues__header">
-      <UserLogo :repository="repository" />
+      <UserLogo 
+      :repository="repository"
+      v-if="isWithAvatar"
+      />
     </section>
     <section class="user-issues__user-info">
       <h1 class="user-info__title">
@@ -19,6 +22,7 @@
         :items="issues"
         @toggle="showItems($event)"
         :isHidden="itemsIsHide"
+        v-if="isWithIssues"
       />
     </section>
     <section class="user-issues__adding-date">
@@ -44,6 +48,14 @@ export default {
       default() {
         return {};
       },
+    },
+    isWithIssues: {
+      type: Boolean,
+      default: true
+    },
+    isWithAvatar: {
+      type: Boolean,
+      default: true
     },
   },
   data() {

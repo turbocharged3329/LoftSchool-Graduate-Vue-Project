@@ -17,7 +17,7 @@
       <div 
       class="repo-actions__count"
       :class="{ 'right-rounded': isRightRounded }">
-        {{ action.count }}
+        {{ toKCount }}
     </div>
   </div>
 </template>
@@ -40,6 +40,15 @@ export default {
       default: false,
     }
   },
+  computed: {
+    toKCount() {
+      if (this.action.count > 1000) {
+        return this.action.count.toString()[0] + this.action.count.toString()[1] + 'k'; 
+      } else {
+        return this.action.count;
+      }
+    }
+  }
 }
 </script>
 

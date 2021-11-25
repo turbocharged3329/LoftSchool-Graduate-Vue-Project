@@ -1,19 +1,26 @@
 <template>
   <div class="custom-button">
-    <button 
-    class="custom-button__btn"
-    :class="{'custom-button__btn-big': isBig, 'custom-button__btn-small': !isBig}"
+    <button
+      class="custom-button__btn"
+      :class="{
+        'custom-button__btn-big': isBig,
+        'custom-button__btn-small': !isBig,
+      }"
     >
-    <span class="custom-button__text">{{ text }}</span>
-      <img class="custom-button__img" v-if="imageSrc"  />
+      <span class="custom-button__text" v-if="!isLoading">{{ text }}</span>
+      <img class="custom-button__img" v-if="imageSrc && !isLoading" />
+      <Loader v-if="isLoading" :color="this.bgColor == 'green' ? 'white' : 'green'"/>
     </button>
   </div>
 </template>
 
 <script>
+import Loader from "@/components/loader/loader";
 export default {
   name: "CustomButton",
-  components: {},
+  components: {
+    Loader
+  },
   props: {
     text: {
       type: String,
@@ -21,12 +28,20 @@ export default {
     },
     imageSrc: {
       type: String,
-      default: null
+      default: null,
     },
     isBig: {
       type: Boolean,
-      default: false
+      default: false,
     },
+    isLoading: {
+      type: Boolean,
+      default: false,
+    },
+    bgColor: {
+      type: String,
+      default: "white",
+    }
   },
   data() {
     return {};

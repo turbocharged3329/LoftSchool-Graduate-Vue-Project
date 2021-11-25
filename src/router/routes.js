@@ -15,7 +15,7 @@ export default [
     {
         name: 'Authorization',
         path: '/auth',
-        component: Authorization
+        component: Authorization,
     },
     {
         name: 'MainPage',
@@ -35,7 +35,8 @@ export default [
                     {
                         name: 'UserLiked',
                         path: 'user-liked',
-                        component: UserLiked,   
+                        component: UserLiked, 
+                        props: true  
                     },
                     {
                         name: 'UserFollowings',

@@ -14,12 +14,14 @@
 <script>
 import UserIssues from '@/components/user-issues/user-issues';
 import {createNamespacedHelpers} from 'vuex';
+import RepoActions from '@/components/repo-actions/repo-actions';
 const {mapState, mapActions, mapGetters} = createNamespacedHelpers('repositories');
 
 export default {
   name: 'UserIssuesList',
   components: {
-    UserIssues
+    UserIssues,
+    RepoActions
   },
   props: {},
   data() {

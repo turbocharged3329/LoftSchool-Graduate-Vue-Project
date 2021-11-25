@@ -1,16 +1,18 @@
 <template>
   <div class="profile">
     <div class="profile__user">
-      <div class="profile__user-header">
-      <h1 class="profile__user-header-text">My profile</h1>
+      <div class="profile__user-info">
+        <div class="profile__user-header">
+          <h1 class="profile__user-header-text">My profile</h1>
+        </div>
+        <UserLogo
+          repoInfo
+          :repository="{
+            name: getUserData.login,
+            avatar: getUserData.avatar_url,
+          }"
+        />
       </div>
-      <UserLogo
-       repoInfo
-       :repository="{
-         name: getUserData.login,
-         avatar: getUserData.avatar_url
-       }"
-      />
     </div>
     <div class="profile__content">
       <router-view></router-view>
@@ -19,30 +21,29 @@
 </template>
 
 <script>
-import UserLogo from '@/components/user-logo/user-logo';
-import {createNamespacedHelpers} from 'vuex';
+import UserLogo from "@/components/user-logo/user-logo";
+import { createNamespacedHelpers } from "vuex";
 
-const {mapGetters} = createNamespacedHelpers('user');
+const { mapGetters, mapActions } = createNamespacedHelpers("user");
 
 export default {
-  name: 'Profile',
+  name: "Profile",
   components: {
-    UserLogo
+    UserLogo,
   },
   data() {
-    return {}
+    return {};
   },
   computed: {
-    ...mapGetters([
-      'getUserData'
-    ])
+    ...mapGetters(["getUserData", "getUserLikedRepos"]),
   },
   mounted() {
-    this.$router.push({name: 'UserLiked'})
-    console.log(this.getUserData);
+    this.$router.push({ name: "UserLiked" });
   },
-  methods: {}
-}
+  methods: {
+    ...mapActions(["getUserLikedReposFromAPI"]),
+  },
+};
 </script>
 
 <style lang="css" scoped>
@@ -54,7 +55,8 @@ export default {
   border-top: 1px solid #999999;
   border-right: 1px solid #999999;
   height: calc(100vh - 263px);
-  position: relative;  
+  display: flex;
+  justify-content: center;
 }
 .profile__content {
   flex-basis: 66.6%;
@@ -63,10 +65,13 @@ export default {
 }
 .profile__user-header {
   position: relative;
-  margin-top: 2%;
+  margin-top: 15px;
+  margin-bottom: 30px;
 }
-.profile__user-header-text {
-  position: absolute;
-  left: 30%;
+.profile__user-info {
+  flex-basis: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 </style>

@@ -1,9 +1,6 @@
 <template>
   <div class="loader">
-    <img
-      src="../../assets/green-loader.png"
-      class="loader__spinner"
-    />
+    <img :src="spinnerSrc" class="loader__spinner" />
   </div>
 </template>
 
@@ -11,9 +8,19 @@
 export default {
   name: "Loader",
   components: {},
-  props: {},
+  props: {
+    color: {
+      type: String,
+      default: "green",
+    },
+  },
   data() {
     return {};
+  },
+  computed: {
+    spinnerSrc() {
+      return require(`/src/assets/${this.color}-loader.png`);
+    },
   },
   mounted() {},
   methods: {},
@@ -26,6 +33,8 @@ export default {
   animation-duration: 5s;
   animation-iteration-count: infinite;
   animation-timing-function: linear;
+  width: 34px;
+  height: 34px;
 }
 @keyframes rotation {
   0% {

@@ -2,11 +2,33 @@
   <div class="user-liked">
     <div class="user-liked__wrapper">
       <div class="user-liked__header">
-        <h1 class="user-liked__hedaer-text">Repositories</h1>
+        <h1 class="user-liked__header-text">Repositories</h1>
+        <span class="user-liked__header-count">{{ getUserLikedRepos.length }}</span>
       </div>
       <div class="user-liked__content">
         <div class="user-followings__loading">
           <Loader v-if="loading" />
+          <template v-for="repo in getUserLikedRepos" :key="repo.id">
+            <UserIssues
+              :isWithIssues="false"
+              :isWithAvatar="false"
+              :repository="{
+                profession: repo.language,
+                description: repo.description,
+              }"
+            >
+              <template v-slot:actions>
+                <RepoActions
+                  :action="{ type: 'like', count: repo.stargazers_count }"
+                  isLeftRounded
+                />
+                <RepoActions
+                  :action="{ type: 'fork', count: repo.forks }"
+                  isRightRounded
+                />
+              </template>
+            </UserIssues>
+          </template>
         </div>
       </div>
     </div>
@@ -15,17 +37,35 @@
 
 <script>
 import Loader from "@/components/loader/loader";
+import { createNamespacedHelpers } from "vuex";
+import UserIssues from "@/components/user-issues/user-issues";
+import RepoActions from '@/components/repo-actions/repo-actions';
+
+const { mapGetters, mapActions } = createNamespacedHelpers("user");
+
 export default {
   name: "UserLiked",
   components: {
     Loader,
+    UserIssues,
+    RepoActions
   },
   props: {},
   data() {
-    return {};
+    return {
+      loading: true,
+    };
   },
-  mounted() {},
-  methods: {},
+  computed: {
+    ...mapGetters(["getUserLikedRepos"]),
+  },
+  async mounted() {
+    await this.getUserLikedReposFromAPI();
+    this.loading = false;
+  },
+  methods: {
+    ...mapActions(["getUserLikedReposFromAPI"]),
+  },
 };
 </script>
 
@@ -33,8 +73,22 @@ export default {
 .user-liked__header {
   text-align: left;
   margin-top: 15px;
+  padding: 0 5%;
+  display: flex;
 }
-.user-liked__hedaer-text {
+.user-liked__header-text {
+  flex-basis: 50%;
+}
+.user-liked__header-count {
+  flex-basis: 50%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: rgba(0, 0, 0, 0.5);
+}
+.user-liked__content {
   padding: 0 5%;
 }
 </style>

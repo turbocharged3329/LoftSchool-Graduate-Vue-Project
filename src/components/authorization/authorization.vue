@@ -12,6 +12,8 @@
             :text="buttonText"
             isBig
             @click="getAuthorization"
+            :isLoading="loading"
+            :bgColor="'green'"
           ></CustomButton>
         </div>
       </div>
@@ -48,6 +50,7 @@ export default {
   data() {
     return {
       buttonText: "Autorize with GitHub",
+      loading: false
     };
   },
   computed: {
@@ -86,6 +89,7 @@ export default {
       const code = new URLSearchParams(window.location.search).get("code");
 
       if (code) {
+        this.loading = true;
         this.axios({
           url: "https://webdev-api.loftschool.com/github",
           method: "POST",
@@ -100,6 +104,7 @@ export default {
         }).then((response) => {
           if (response.status >= 200 && response.status < 300) {
             localStorage.setItem("token", response.data.token);
+            this.loading = false
             this.buttonText = "Enter Gitogram/";
           }
         });
