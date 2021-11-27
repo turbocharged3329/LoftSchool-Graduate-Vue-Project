@@ -8,8 +8,10 @@
       <div class="user-liked__content">
         <div class="user-followings__loading">
           <Loader v-if="loading" />
+          </div>
           <template v-for="repo in getUserLikedRepos" :key="repo.id">
             <UserIssues
+              v-if="!loading"
               :isWithIssues="false"
               :isWithAvatar="false"
               :repository="{
@@ -19,17 +21,17 @@
             >
               <template v-slot:actions>
                 <RepoActions
-                  :action="{ type: 'like', count: repo.stargazers_count }"
+                  :action="{ type: 'like', owner: repo.owner.login, name: repo.name ,count: repo.stargazers_count }"
+                  isActive
                   isLeftRounded
                 />
                 <RepoActions
-                  :action="{ type: 'fork', count: repo.forks }"
+                  :action="{ type: 'fork', owner: repo.owner.login, name: repo.name, count: repo.forks }"
                   isRightRounded
                 />
               </template>
             </UserIssues>
           </template>
-        </div>
       </div>
     </div>
   </div>

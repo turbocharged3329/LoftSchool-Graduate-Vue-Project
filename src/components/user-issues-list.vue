@@ -54,5 +54,7 @@ export default {
 <style lang="css" scoped>
 .user-issues-list {
   padding: 0 15%;
+  height: calc(100vh - 262px);
+  overflow-y: scroll;
 }
 </style>

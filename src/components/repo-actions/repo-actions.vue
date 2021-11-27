@@ -3,10 +3,12 @@
     <button 
     class="repo-actions__btn" 
     :class="{ 'left-rounded': isLeftRounded }"
+    @click="likeActions"
     >
       <div
       v-if="action.type=='like'" 
       class="star-icon"
+      :class="{'star-icon__active': activity}"
       ></div>
       <div
       v-if="action.type=='fork'" 
@@ -38,6 +40,15 @@ export default {
     isRightRounded: {
       type: Boolean,
       default: false,
+    },
+    isActive: {
+      type: Boolean,
+      default: false
+    }
+  },
+  data() {
+    return {
+      activity: false,
     }
   },
   computed: {
@@ -48,6 +59,25 @@ export default {
         return this.action.count;
       }
     }
+  },
+  methods: {
+    async likeActions() {
+      try {
+      await this.axios({
+        url: `https://api.github.com/user/starred/${this.action.owner}/${this.action.repo}`,
+        method: this.activity ? "DELETE" : "PUT",
+        headers: {
+          Authorization: `token ${localStorage.getItem("token")}`,
+        },
+      }) 
+      this.activity = false;
+      } catch (e) {
+        console.log(e);
+      }
+    }
+  },
+  mounted() {
+    this.activity = this.isActive ? true : false; 
   }
 }
 </script>
@@ -74,6 +104,9 @@ export default {
 }
 .repo-actions__btn:hover .fork-icon {
   background-image: url('../../assets/forkgreen-icon.svg');
+}
+.star-icon__active {
+  background-image: url('../../assets/stargreen-icon.svg') !important;
 }
 .btn__icon {
   display: inline;

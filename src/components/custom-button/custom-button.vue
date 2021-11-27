@@ -53,6 +53,7 @@ export default {
 .custom-button {
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 .custom-button__btn {
   background: #31ae54;

@@ -6,10 +6,11 @@
           <h1 class="profile__user-header-text">My profile</h1>
         </div>
         <UserLogo
-          repoInfo
+          repo-info
           :repository="{
             name: getUserData.login,
             avatar: getUserData.avatar_url,
+            fullname: getUserData.name
           }"
         />
       </div>
@@ -62,6 +63,8 @@ export default {
   flex-basis: 66.6%;
   border-top: 1px solid #999999;
   position: relative;
+  height: calc(100vh - 262px);
+  overflow-y: scroll;
 }
 .profile__user-header {
   position: relative;

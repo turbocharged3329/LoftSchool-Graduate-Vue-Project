@@ -13,8 +13,9 @@
         }"
       />
     </div>
-    <div class="user-logo__info"
-    :class="{'user-logo__info-with-gap': !isVertical}"
+    <div
+      class="user-logo__info"
+      :class="{ 'user-logo__info-with-gap': !isVertical }"
     >
       <p
         class="user-logo__user-name"
@@ -24,10 +25,37 @@
       </p>
       <div v-if="repoInfo" class="user-logo__repo-info">
         <div class="repo-info__statistics">
-          <div class="statistics__repos"><span>10 repos</span></div>
-          <div class="statistics__watchers"><span>54 watchers</span></div>
+          <div class="statistics__repos">
+            <span>10</span>
+            <router-link :to="{ name: 'UserLiked' }">
+              <a
+                :class="{
+                  'statistics__watchers-link': currentRoute != 'UserLiked',
+                }"
+              >
+                repos
+              </a>
+            </router-link>
+          </div>
+          <div class="statistics__watchers">
+            <span>54</span>
+            <router-link :to="{ name: 'UserFollowings' }">
+              <a
+                :class="{
+                  'statistics__watchers-link': currentRoute != 'UserFollowings',
+                }"
+              >
+                watchers
+              </a>
+            </router-link>
+          </div>
         </div>
-        <div class="repo-info__fullname"><span class="fullname">User Fullname</span></div>
+        <div 
+        class="repo-info__fullname"
+        v-if="repository.fullname"
+        >
+          <span class="fullname">User Fullname</span>
+        </div>
       </div>
     </div>
   </div>
@@ -60,6 +88,11 @@ export default {
   },
   data() {
     return {};
+  },
+  computed: {
+    currentRoute() {
+      return this.$router.currentRoute.value.name;
+    }
   },
 };
 </script>
@@ -94,11 +127,14 @@ export default {
 .statistics__watchers {
   margin-left: 5px;
 }
+.statistics__watchers-link {
+  color: #31ae54;
+}
 .repo-info__fullname {
   text-align: left;
 }
 .fullname {
-  color: rgba(0, 0, 0, 0.5); 
+  color: rgba(0, 0, 0, 0.5);
 }
 .vertical {
   flex-direction: column;
