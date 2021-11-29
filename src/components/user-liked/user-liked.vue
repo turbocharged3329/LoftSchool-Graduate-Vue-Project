@@ -39,11 +39,10 @@
 
 <script>
 import Loader from "@/components/loader/loader";
-import { createNamespacedHelpers } from "vuex";
 import UserIssues from "@/components/user-issues/user-issues";
 import RepoActions from '@/components/repo-actions/repo-actions';
-
-const { mapGetters, mapActions } = createNamespacedHelpers("user");
+import { useStore } from "vuex";
+import {onMounted, computed, ref} from 'vue';
 
 export default {
   name: "UserLiked",
@@ -53,20 +52,21 @@ export default {
     RepoActions
   },
   props: {},
-  data() {
+  setup() {
+    const loading = ref(true);
+    const {dispatch, state} = useStore();
+    const getUserLikedRepos = computed(() => {
+      return state.user.userLiked.data
+    })
+
+    onMounted(async () => {
+      await dispatch('user/getUserLikedReposFromAPI')
+      loading.value = false;
+    })
+
     return {
-      loading: true,
-    };
-  },
-  computed: {
-    ...mapGetters(["getUserLikedRepos"]),
-  },
-  async mounted() {
-    await this.getUserLikedReposFromAPI();
-    this.loading = false;
-  },
-  methods: {
-    ...mapActions(["getUserLikedReposFromAPI"]),
+      getUserLikedRepos
+    }
   },
 };
 </script>

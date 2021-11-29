@@ -30,9 +30,8 @@
 <script>
 import Loader from "@/components/loader/loader";
 import FollowButton from "@/components/follow-button/follow-button"
-import {createNamespacedHelpers} from 'vuex'
-
-const {mapGetters, mapActions} = createNamespacedHelpers('user');
+import {useStore} from 'vuex';
+import {onMounted, computed, ref} from 'vue';
 
 export default {
   name: "UserFollowings",
@@ -40,26 +39,24 @@ export default {
     Loader,
     FollowButton
   },
-  props: {},
-  data() {
-    return {
-      loading: false,
-    };
-  },
-  computed: {
-    ...mapGetters([
-      'getUserLikedRepos'
-    ])
-  },
-  methods: {
-    ...mapActions([
-      'getUserLikedReposFromAPI'
-    ]),
-  },
-  async mounted() {
-    await this.getUserLikedReposFromAPI();
-  },
+  setup() {
+    const loading = ref(true);
+    const { state, dispatch } = useStore();
+    const getUserLikedRepos = computed(() => {
+      return state.user.userLiked.data;
+    })
 
+    onMounted(async () => {
+      await dispatch('user/getUserLikedReposFromAPI')
+      loading.value = false;
+    })
+    
+    return {
+      state,
+      getUserLikedRepos,
+      loading
+    }
+  },
 };
 </script>
 

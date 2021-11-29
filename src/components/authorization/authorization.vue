@@ -80,7 +80,7 @@ export default {
             }).then((response) => {
               if (response.status >= 200 && response.status < 300) {
                 this.SET_USER_DATA(response.data);
-                this.$router.push({ name: "UserIssuesList" });
+                this.$router.replace({ name: "UserIssuesList" });
               }
             });
           } catch (e) {

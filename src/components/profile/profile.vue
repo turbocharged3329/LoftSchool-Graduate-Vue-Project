@@ -10,7 +10,7 @@
           :repository="{
             name: getUserData.login,
             avatar: getUserData.avatar_url,
-            fullname: getUserData.name
+            fullname: getUserData.name,
           }"
         />
       </div>
@@ -23,26 +23,32 @@
 
 <script>
 import UserLogo from "@/components/user-logo/user-logo";
-import { createNamespacedHelpers } from "vuex";
-
-const { mapGetters, mapActions } = createNamespacedHelpers("user");
+import { useStore } from "vuex";
+import { useRouter } from 'vue-router'
+import { computed, onMounted } from "vue";
 
 export default {
   name: "Profile",
   components: {
     UserLogo,
   },
-  data() {
-    return {};
-  },
-  computed: {
-    ...mapGetters(["getUserData", "getUserLikedRepos"]),
-  },
-  mounted() {
-    this.$router.push({ name: "UserLiked" });
-  },
-  methods: {
-    ...mapActions(["getUserLikedReposFromAPI"]),
+  setup() {
+    const {state} = useStore();
+    const router = useRouter();
+
+    const getUserData = computed(() => {
+      return state.user.user.data;
+    });
+
+    onMounted(() => {
+      router.push({ name: "UserLiked" });
+    })
+
+    return {
+      getUserData,
+      state,
+      router
+    };
   },
 };
 </script>
