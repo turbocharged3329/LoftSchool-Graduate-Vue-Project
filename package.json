@@ -5,10 +5,11 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
-    "storybook": "start-storybook -p 6006",
+    "deploy": "node scripts/gh-pages-deploy.js",
     "build-storybook": "build-storybook",
-    "deploy": "node scripts/gh-pages-deploy.js"
+    "storybook": "start-storybook -p 6006"
   },
   "dependencies": {
     "@storybook/addon-knobs": "^6.3.1",
@@ -30,14 +31,18 @@
     "@storybook/vue3": "^6.3.12",
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-plugin-unit-jest": "^4.5.15",
     "@vue/cli-service": "~4.5.0",
     "@vue/compiler-sfc": "^3.0.0",
+    "@vue/test-utils": "^2.0.0-0",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.2.3",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^7.0.0",
-    "vue-loader": "^16.8.2",
-    "execa": "latest"
+    "execa": "latest",
+    "typescript": "~3.9.3",
+    "vue-jest": "^5.0.0-0",
+    "vue-loader": "^16.8.2"
   },
   "eslintConfig": {
     "root": true,
@@ -51,7 +56,18 @@
     "parserOptions": {
       "parser": "babel-eslint"
     },
-    "rules": {}
+    "rules": {},
+    "overrides": [
+      {
+        "files": [
+          "**/__tests__/*.{j,t}s?(x)",
+          "**/tests/unit/**/*.spec.{j,t}s?(x)"
+        ],
+        "env": {
+          "jest": true
+        }
+      }
+    ]
   },
   "browserslist": [
     "> 1%",

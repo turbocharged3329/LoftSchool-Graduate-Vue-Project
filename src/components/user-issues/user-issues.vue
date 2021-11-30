@@ -4,6 +4,7 @@
       <UserLogo 
       :repository="repository"
       v-if="isWithAvatar"
+      id="user-issues"
       />
     </section>
     <section class="user-issues__user-info">
@@ -23,6 +24,7 @@
         @toggle="showItems($event)"
         :isHidden="itemsIsHide"
         v-if="isWithIssues"
+        id="toggler"
       />
     </section>
     <section class="user-issues__adding-date">
@@ -38,7 +40,6 @@ import UserLogo from '@/components/user-logo/user-logo';
 export default {
   name: "UserIssues",
   components: {
-    // RepoActions,
     Toggler,
     UserLogo
   },
