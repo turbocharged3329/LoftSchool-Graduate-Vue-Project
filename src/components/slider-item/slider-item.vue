@@ -110,7 +110,7 @@ export default {
   background-color: white;
   margin: 0;
   border-radius: 5px;
-  height: 538px;
+  height: calc(70vh);
   transition: 0.4s;
 }
 .slider-item__header {

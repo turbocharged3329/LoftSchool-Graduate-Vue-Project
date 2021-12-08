@@ -116,6 +116,7 @@ export default {
   height: 70%;
   position: absolute;
   left: 50%;
+  top: 100px;
   margin-left: -350px;
   justify-content: space-between;
   flex-wrap: nowrap;
